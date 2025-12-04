@@ -1,6 +1,6 @@
 substitutions:
-  _IMAGE_NAME: "REQUIRED_BUT_NOT_SET"
-  _SERVICE_NAME: "REQUIRED_BUT_NOT_SET"
+  _IMAGE_NAME: "REQUIRED"
+  _SERVICE_NAME: "REQUIRED"
   _SERVICE_ACCOUNT: "projects/green-energy-tracker-cloud/serviceAccounts/cloud-build-sa-prod@green-energy-tracker-cloud.iam.gserviceaccount.com"
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
