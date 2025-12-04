@@ -1,9 +1,8 @@
 substitutions:
-  _ARTIFACT_REGISTRY_REPO: "microservices-repo"
+  _ARTIFACT_REGISTRY_REPO: ""
   _LOCATION: "us-east1"
   _IMAGE_NAME: "REQUIRED_BUT_NOT_SET"
   _SERVICE_NAME: "REQUIRED_BUT_NOT_SET"
-  _CI_CD_REPO_URL: "https://github.com/green-energy-tracker-cloud/ci-cd-templates.git"
 
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
@@ -23,7 +22,7 @@ steps:
       - 'clone'
       - '--depth'
       - '1'
-      - '_CI_CD_REPO_URL'
+      - 'https://github.com/green-energy-tracker-cloud/ci-cd-templates.git'
       - 'common-scripts'
 
   - id: "Unit Test"
@@ -89,7 +88,7 @@ steps:
     name: 'gcr.io/cloud-builders/mvn'
     args: [
       'com.google.cloud.tools:jib-maven-plugin:3.4.5:build',
-      '-Dimage=$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_ARTIFACT_REGISTRY_REPO/$_IMAGE_NAME:$COMMIT_SHA',
+      '-Dimage=us-east1-docker.pkg.dev/$PROJECT_ID/microservices-repo/$_IMAGE_NAME:$COMMIT_SHA',
       '-DskipTests'
     ]
 
@@ -98,9 +97,9 @@ steps:
     entrypoint: 'bash'
     args: ['common-scripts/ci/check_vulnerabilities.sh']
     env:
-      - 'LOCATION=$_LOCATION'
+      - 'LOCATION=us-east1'
       - 'PROJECT_ID=$PROJECT_ID'
-      - 'ARTIFACT_REGISTRY_REPO=$_ARTIFACT_REGISTRY_REPO'
+      - 'ARTIFACT_REGISTRY_REPO=microservices-repo'
       - 'IMAGE_NAME=$_IMAGE_NAME'
       - 'COMMIT_SHA=$COMMIT_SHA'
 
@@ -115,4 +114,4 @@ steps:
       - '--delivery-pipeline=delivery-pipeline'
       - '--region=us-east1'
       - '--source=./cd/'
-      - '--images=$_SERVICE_NAME=$_LOCATION-docker.pkg.dev/$PROJECT_ID/$_ARTIFACT_REGISTRY_REPO/$_IMAGE_NAME:${COMMIT_SHA}'
+      - '--images=$_SERVICE_NAME=us-east1-docker.pkg.dev/$PROJECT_ID/microservices-repo/$_IMAGE_NAME:${COMMIT_SHA}'
