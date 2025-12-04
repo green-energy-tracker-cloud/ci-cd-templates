@@ -1,7 +1,7 @@
 substitutions:
   _IMAGE_NAME: "REQUIRED_BUT_NOT_SET"
   _SERVICE_NAME: "REQUIRED_BUT_NOT_SET"
-
+  _SERVICE_ACCOUNT: "projects/green-energy-tracker-cloud/serviceAccounts/cloud-build-sa-prod@green-energy-tracker-cloud.iam.gserviceaccount.com"
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
   volumes:
@@ -12,6 +12,8 @@ availableSecrets:
   secretManager:
     - versionName: projects/$PROJECT_ID/secrets/sonar-cloud-token/versions/latest
       env: 'SONAR_CLOUD_TOKEN'
+
+serviceAccount: '$_SERVICE_ACCOUNT'
 
 steps:
   - id: "Fetch Common Scripts"
