@@ -1,6 +1,7 @@
 substitutions:
   _IMAGE_NAME: "REQUIRED"
   _SERVICE_NAME: "REQUIRED"
+  _COMMIT_SHA: "REQUIRED"
   _SERVICE_ACCOUNT: "projects/green-energy-tracker-cloud/serviceAccounts/cloud-build-sa-prod@green-energy-tracker-cloud.iam.gserviceaccount.com"
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
@@ -88,7 +89,7 @@ steps:
     name: 'gcr.io/cloud-builders/mvn'
     args: [
       'com.google.cloud.tools:jib-maven-plugin:3.4.5:build',
-      '-Dimage=us-east1-docker.pkg.dev/$PROJECT_ID/microservices-repo/$_IMAGE_NAME:$COMMIT_SHA',
+      '-Dimage=us-east1-docker.pkg.dev/$PROJECT_ID/microservices-repo/$_IMAGE_NAME:$_COMMIT_SHA',
       '-DskipTests'
     ]
 
@@ -101,7 +102,7 @@ steps:
       - 'PROJECT_ID=$PROJECT_ID'
       - 'ARTIFACT_REGISTRY_REPO=microservices-repo'
       - 'IMAGE_NAME=$_IMAGE_NAME'
-      - 'COMMIT_SHA=$COMMIT_SHA'
+      - 'COMMIT_SHA=$_COMMIT_SHA'
 
   - id: "Create Release"
     name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -114,4 +115,4 @@ steps:
       - '--delivery-pipeline=delivery-pipeline'
       - '--region=us-east1'
       - '--source=./cd/'
-      - '--images=$_SERVICE_NAME=us-east1-docker.pkg.dev/$PROJECT_ID/microservices-repo/$_IMAGE_NAME:${COMMIT_SHA}'
+      - '--images=$_SERVICE_NAME=us-east1-docker.pkg.dev/$PROJECT_ID/microservices-repo/$_IMAGE_NAME:$_COMMIT_SHA'
