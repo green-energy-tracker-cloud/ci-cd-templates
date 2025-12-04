@@ -2,6 +2,7 @@ substitutions:
   _IMAGE_NAME: "REQUIRED"
   _SERVICE_NAME: "REQUIRED"
   _COMMIT_SHA: "REQUIRED"
+  _SHORT_SHA: "REQUIRED"
   _SERVICE_ACCOUNT: "projects/green-energy-tracker-cloud/serviceAccounts/cloud-build-sa-prod@green-energy-tracker-cloud.iam.gserviceaccount.com"
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
@@ -111,7 +112,7 @@ steps:
       - 'deploy'
       - 'releases'
       - 'create'
-      - 'rel-${SHORT_SHA}'
+      - 'rel-$_SHORT_SHA'
       - '--delivery-pipeline=delivery-pipeline'
       - '--region=us-east1'
       - '--source=./cd/'
