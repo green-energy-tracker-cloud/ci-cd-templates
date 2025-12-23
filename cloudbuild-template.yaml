@@ -3,7 +3,7 @@ substitutions:
   _SERVICE_NAME: "REQUIRED"
   _COMMIT_SHA: "REQUIRED"
   _SHORT_SHA: "REQUIRED"
-  _SERVICE_ACCOUNT: "projects/green-energy-tracker-cloud/serviceAccounts/cloud-build-sa-prod@green-energy-tracker-cloud.iam.gserviceaccount.com"
+  _SERVICE_ACCOUNT: "projects/reference-lens-482009-j5/serviceAccounts/cloud-build-sa-prod@reference-lens-482009-j5.iam.gserviceaccount.com"
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
   volumes:
