@@ -22,7 +22,7 @@ echo "Starting Sonar analysis for project: $PROJECT_ID"
 echo "Organization: green-energy-tracker-cloud"
 echo "Analysis is running... waiting for Quality Gate result..."
 
-mvn sonar:sonar \
+mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
   -Dsonar.host.url=https://sonarcloud.io \
   -Dsonar.organization=green-energy-tracker-cloud \
   -Dsonar.projectKey="$PROJECT_ID" \
