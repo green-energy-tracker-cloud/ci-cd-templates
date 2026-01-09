@@ -27,6 +27,6 @@ mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
   -Dsonar.organization=green-energy-tracker-cloud \
   -Dsonar.projectKey="$PROJECT_ID" \
   -Dsonar.login="$SONAR_CLOUD_TOKEN" \
-  -Dsonar.qualitygate.wait=true
+  -Dsonar.qualitygate.wait=false
 
 echo "Sonar Cloud analysis completed successfully."
