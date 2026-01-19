@@ -83,7 +83,7 @@ steps:
     entrypoint: 'bash'
     args: [ 'common-scripts/ci/sonar_cloud_analysis.sh' ]
     env:
-      - 'PROJECT_ID=$PROJECT_ID'
+      - 'PROJECT_ID=$_SERVICE_NAME'
     secretEnv: [ 'SONAR_CLOUD_TOKEN' ]
 
   - id: "Push to Artifact Registry"
